@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  nginx-proxy-test:
+    container_name: nginx-proxy-test
+    build: ./builds/nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./certs:/etc/nginx/certs
+
+  mysql8-test:
+    image: mysql:8.0.17
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci --default-authentication-plugin=mysql_native_password
+    container_name: mysql8-test
+    ports:
+      - "33060:3306"
+    volumes:
+      - ./db-data:/var/lib/mysql:delegated
+    working_dir: /var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+
+  php-fpm-82-test:
+    container_name: php-fpm-82-test
+    build: builds/php-fpm-82
+    volumes:
+      - ./:/var/www/
+    working_dir: /var/www
+    links:
+      - mysql8-test
+
+  backend-test:
+    container_name: backend-test
+    build: ./builds/backend
+    environment:
+      - VIRTUAL_HOST=backend.test
+    volumes:
+      - ./backend:/var/www/backend
+    working_dir: /var/www/backend
+    depends_on:
+      - php-fpm-82-test
+
+  frontend-test:
+    container_name: frontend-test
+    build: ./builds/frontend
+    environment:
+      - VIRTUAL_HOST=frontend.test
+    volumes:
+      - ../:/var/www/
+    working_dir: /var/www
