@@ -49,5 +49,5 @@ services:
     environment:
       - VIRTUAL_HOST=frontend.test
     volumes:
-      - ../:/var/www/
-    working_dir: /var/www
+      - ./:/var/www/
+    working_dir: /var/www/frontend
