@@ -16,9 +16,7 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::get('/', function () {
-    return response()->json([]);
-});
+Route::get('/health-check', [Controllers\HealthCheckController::class, 'getHealthCheck']);
 
 Route::post('/register', [Controllers\ApiAuthController::class, 'postRegister']);
 Route::post('/login', [Controllers\ApiAuthController::class, 'postLogin']);
