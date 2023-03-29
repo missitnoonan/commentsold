@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers;
-use App\Library\JsonResponseData;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------

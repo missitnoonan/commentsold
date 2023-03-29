@@ -13,7 +13,7 @@ class FallBackController extends Controller
     {
         return response()->json(JsonResponseData::formatData(
             $request,
-            'Not Found',
+            'This route is not supported by the API',
             Message::MESSAGE_WARNING), 404);
     }
 }
