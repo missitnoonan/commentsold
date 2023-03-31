@@ -215,5 +215,5 @@ return [
     'default_password' => env('DEFAULT_PASSWORD', 'Ch@ng3m3'),
     'test_user_email' => env('TEST_USER_EMAIL', 'testy@test.com'),
     'test_user_password' => env('TEST_USER_PASSWORD', 'foobarfizzbuzz'),
-    'load_test_routes' => env('LOAD_TEST_ROUTES', false),
+    'include_test_routes' => env('INCLUDE_TEST_ROUTES', false),
 ];
