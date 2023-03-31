@@ -13,6 +13,7 @@
     * php artisan migrate
     * php artisan jwt:secret
 * exec into frontend
+  * npm i vite -g
   * npm install 
   * npm build
   * either
