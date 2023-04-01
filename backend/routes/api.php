@@ -29,4 +29,9 @@ Route::group(['middleware' => ['auth:api']], function () {
         Route::get('/', [Controllers\ProductController::class, 'list']);
         Route::get('/{id}', [Controllers\ProductController::class, 'view']);
     });
+
+    Route::group(['prefix' => 'inventory'], function () {
+        Route::get('/', [Controllers\InventoryController::class, 'list']);
+        Route::get('/{id}', [Controllers\InventoryController::class, 'view']);
+    });
 });

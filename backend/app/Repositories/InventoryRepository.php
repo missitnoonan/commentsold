@@ -4,8 +4,9 @@ namespace App\Repositories;
 
 use App\Interfaces\InventoryRepositoryInterface;
 use App\Models\Inventory;
+use Illuminate\Database\Eloquent\Builder;
 
-class InventoryRepository implements InventoryRepositoryInterface
+class InventoryRepository extends AbstractRepository implements InventoryRepositoryInterface
 {
     public function load(array $inventory_data): bool {
         try {
@@ -17,5 +18,30 @@ class InventoryRepository implements InventoryRepositoryInterface
 
             return false;
         }
+    }
+
+    public function list(
+        $page = 1,
+        $limit = 20,
+        $sort = null,
+        $sort_direction = 'desc'
+    ): array
+    {
+        $inventory = new Inventory();
+        $query = $inventory->newQuery();
+
+        return $this->getList($query, $page, $limit, $sort, $sort_direction);
+    }
+
+    public function find($inventory_id): array
+    {
+        return [];
+    }
+
+    protected function addAuthorization(Builder $query): Builder
+    {
+        return $query
+            ->rightJoin('products', 'inventories.product_id', 'products.id')
+            ->where('products.admin_id', auth()->user()->id);
     }
 }

@@ -20,13 +20,12 @@ class ProductController extends Controller
 
     public function list(ProductListRequest $request): JsonResponse
     {
-        $user_id = auth()->user()->id;
         $page = $request->input('page') ?? 1;
         $limit = $request->input('limit') ?? 20;
-        $sort = $request->input('sort') ?? null;
+        $sort = $request->input('sort');
         $sort_direction = $request->input('sort_direction') ?? 'desc';
 
-        $list = $this->product_repository->list($user_id, $page, $limit, $sort, $sort_direction);
+        $list = $this->product_repository->list($page, $limit, $sort, $sort_direction);
 
         return response()->json(JsonResponseData::formatData(
             $request,
@@ -47,13 +46,13 @@ class ProductController extends Controller
                 Message::MESSAGE_OK,
                 $product,
             ));
-        } else {
-            return response()->json(JsonResponseData::formatData(
-                $request,
-                'Unauthorized',
-                Message::MESSAGE_WARNING,
-                [],
-            ));
         }
+
+        return response()->json(JsonResponseData::formatData(
+            $request,
+            'Unauthorized',
+            Message::MESSAGE_WARNING,
+            [],
+        ));
     }
 }

@@ -22,7 +22,6 @@ class ProductRepository extends AbstractRepository implements ProductRepositoryI
     }
 
     public function list(
-        $user_id,
         $page = 1,
         $limit = 20,
         $sort = null,
