@@ -1,4 +1,7 @@
 <script setup>
+  import {useUserStore} from "../../stores/user";
+
+  const userStore = useUserStore();
 </script>
 
 <template>
@@ -11,7 +14,12 @@
           </p>
           <div class="columns is-multiline">
             <div class="column is-12">
-              <router-link :to="{ name: 'test_parameter', params: { id: '1' }}">Test Param 1</router-link>
+              <div v-if="userStore.is_logged_in">
+                <router-link :to="{ name: 'products_list'}">View Products</router-link>
+              </div>
+              <div v-else>
+                Please Log In To View Options
+              </div>
             </div>
           </div>
         </div>

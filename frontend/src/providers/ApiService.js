@@ -1,4 +1,5 @@
 import  { useAlertStore } from "../stores/alert";
+import { useUserStore } from "../stores/user";
 
 class ApiService {
     constructor() {
@@ -50,7 +51,10 @@ class ApiService {
 
     #addHeader(options, with_auth = false) {
         if (with_auth) {
-            // TODO
+            options.headers = {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + useUserStore().access_token
+            };
         } else {
             options.headers = {
                 "Content-Type": "application/json",

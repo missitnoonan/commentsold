@@ -23,8 +23,8 @@ class AuthProvider {
     }
 
     checkCachedToken() {
-        const access_token = window.localStorage.getItem('dive_access_token');
-        const expires_at = window.localStorage.getItem('dive_expires_at');
+        const access_token = window.localStorage.getItem('cs_access_token');
+        const expires_at = window.localStorage.getItem('cs_expires_at');
         if (!access_token || !expires_at) {
             return false;
         }

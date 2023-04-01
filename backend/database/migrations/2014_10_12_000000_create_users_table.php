@@ -13,14 +13,20 @@ return new class extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('first_name');
-            $table->string('last_name');
+            $table->string('name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->boolean('is_admin')->default(0);
+            $table->boolean('super_admin')->default(0);
+            $table->string('shop_name')->nullable();
             $table->rememberToken();
             $table->timestamps();
+            $table->string('card_brand')->nullable();
+            $table->string('card_last_four')->nullable();
+            $table->timestamp('trial_ends_at')->nullable();
+            $table->string('shop_domain')->nullable();
+            $table->boolean('is_enabled')->default(0);
+            $table->string('billing_plan')->nullable();
         });
     }
 

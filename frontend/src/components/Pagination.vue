@@ -93,6 +93,9 @@
       </li>
 
       <li v-if="display.ending_ellipsis">
+        <span class="pagination-ellipsis">&hellip;</span>
+      </li>
+      <li v-if="display.ending_ellipsis">
         <a
             class="pagination-link"
             aria-label="Goto page {{ props.pages }}"
@@ -100,9 +103,6 @@
         >
           {{ props.pages }}
         </a>
-      </li>
-      <li v-if="display.ending_ellipsis">
-        <span class="pagination-ellipsis">&hellip;</span>
       </li>
     </ul>
   </nav>

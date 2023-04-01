@@ -24,4 +24,9 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::post('/password', [Controllers\ApiUserController::class, 'postResetPassword']);
     Route::post('/logout', [Controllers\ApiAuthController::class, 'postLogout']);
     Route::post('/refresh', [Controllers\ApiAuthController::class, 'postRefresh']);
+
+    Route::group(['prefix' => 'products'], function () {
+        Route::get('/', [Controllers\ProductController::class, 'list']);
+        Route::get('/{id}', [Controllers\ProductController::class, 'view']);
+    });
 });

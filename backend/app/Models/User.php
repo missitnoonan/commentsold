@@ -20,8 +20,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array<int, string>
      */
     protected $fillable = [
-        'first_name',
-        'last_name',
+        'name',
         'email',
         'password',
         'is_admin',
@@ -56,8 +55,8 @@ class User extends Authenticatable implements JWTSubject
         return [];
     }
 
-    public function diveLogs(): HasMany
+    public function products(): HasMany
     {
-        return $this->hasMany(DiveLog::class);
+        return $this->hasMany(Product::class, 'admin_id');
     }
 }
