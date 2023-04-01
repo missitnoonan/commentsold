@@ -43,6 +43,3 @@ RUN curl -L https://cs.symfony.com/download/php-cs-fixer-v2.phar -o php-cs-fixer
     mv php-cs-fixer /usr/local/bin/php-cs-fixer
 
 COPY ./xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
-
-COPY ./ssh-keys /root/.ssh
-RUN chmod 600 /root/.ssh/id_rsa
