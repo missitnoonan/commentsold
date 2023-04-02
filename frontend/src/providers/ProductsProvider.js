@@ -12,12 +12,12 @@ class ProductsProvider {
             filtered_query_params[query_param] = params[query_param];
         }
 
-        return ApiService.get('/products?' + new URLSearchParams(filtered_query_params).toString(), true);
+        return await ApiService.get('/products?' + new URLSearchParams(filtered_query_params).toString(), true);
     }
 
     async getProduct(id)
     {
-        return ApiService.get('/products/' + id, true)
+        return await ApiService.get('/products/' + id, true)
     }
 }
 

@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth:api']], function () {
 
     Route::group(['prefix' => 'inventory'], function () {
         Route::get('/', [Controllers\InventoryController::class, 'list']);
+        Route::get('/stats', [Controllers\InventoryController::class, 'stats']);
         Route::get('/{id}', [Controllers\InventoryController::class, 'view']);
     });
 });

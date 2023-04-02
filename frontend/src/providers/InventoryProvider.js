@@ -13,12 +13,17 @@ class InventoryProvider {
             filtered_query_params[query_param] = params[query_param];
         }
 
-        return ApiService.get('/inventory?' + new URLSearchParams(filtered_query_params).toString(), true);
+        return await ApiService.get('/inventory?' + new URLSearchParams(filtered_query_params).toString(), true);
     }
 
     async getInventoryItem(id)
     {
-        return ApiService.get('/inventory/' + id, true)
+        return await ApiService.get('/inventory/' + id, true)
+    }
+
+    async getStats()
+    {
+        return await ApiService.get('/inventory/stats', true)
     }
 }
 

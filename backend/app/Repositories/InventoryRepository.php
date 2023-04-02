@@ -45,6 +45,20 @@ class InventoryRepository extends AbstractRepository implements InventoryReposit
         }
     }
 
+    public function stats(): array
+    {
+        $query = Inventory::query();
+        $query = $this->addAuthorization($query);
+
+        $sku_count = $query->count();
+        $total_items = $query->sum('quantity');
+
+        return [
+            'sku_count' => $sku_count,
+            'total_items' => (int) $total_items,
+        ];
+    }
+
     protected function addAuthorization(Builder $query): Builder
     {
         return $query

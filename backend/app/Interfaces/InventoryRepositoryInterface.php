@@ -9,4 +9,6 @@ interface InventoryRepositoryInterface
     public function list($page, $limit, $sort = null, $sort_direction = 'DESC', $search = ''): array;
 
     public function find($inventory_id): array;
+
+    public function stats(): array;
 }

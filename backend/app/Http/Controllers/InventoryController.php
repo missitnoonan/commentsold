@@ -55,4 +55,16 @@ class InventoryController extends Controller
             [],
         ), 401);
     }
+
+    public function stats(Request $request): JsonResponse
+    {
+        $stats = $this->inventory_repository->stats();
+
+        return response()->json(JsonResponseData::formatData(
+            $request,
+            '',
+            Message::MESSAGE_OK,
+            $stats,
+        ));
+    }
 }

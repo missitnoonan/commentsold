@@ -7,6 +7,7 @@
   import SearchBar from "../../../components/SearchBar.vue";
 
   const inventory = ref([]);
+  const stats = ref({});
 
   const sort = ref('id');
   const sort_direction = ref('desc');
@@ -18,6 +19,7 @@
 
   const is_loading = ref(true);
   const show_pagination = ref(false);
+  const show_stats = ref(false);
 
   // Display the Product Name, sku, quantity, color, size, price and cost
   const sortable_fields = {
@@ -52,8 +54,16 @@
     return true;
   }
 
+  async function getStats() {
+    await inventoryProvider.getStats()
+        .then((results) => {
+          stats.value = results;
+        })
+  }
+
   onMounted(() => {
     getList().then(() => show_pagination.value = true);
+    getStats().then(() => show_stats.value = true);
   });
 
   // Not DRY, but simple
@@ -93,6 +103,7 @@
       <div class="card">
         <div class="card-content">
           <p class="title">Inventory</p>
+          <p v-if="show_stats" class="subtitle">{{ stats.total_items }} Items In {{ stats.sku_count }} SKUs</p>
           <div v-if="show_pagination" class="columns is-multiline is-mobile">
             <div class="column is-12">
               <ListOptions
