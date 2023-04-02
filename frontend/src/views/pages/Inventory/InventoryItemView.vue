@@ -1,18 +1,25 @@
 <script setup>
   import { useRoute } from "vue-router";
-  import {computed, onMounted, ref} from "vue";
+  import { computed, onMounted, ref} from "vue";
   import inventoryProvider from "../../../providers/InventoryProvider";
-  import productsProvider from "../../../providers/ProductsProvider";
 
   const route = useRoute();
   const inventory_item = ref({});
   const is_loading = ref(false);
 
+  const product_name = computed(() => {
+    if (inventory_item.value.hasOwnProperty('product')) {
+      return inventory_item.value.product.product_name;
+    }
+
+    return '';
+  })
+
   onMounted(() => {
     is_loading.value = true;
     inventoryProvider.getInventoryItem(route.params.id)
         .then((response) => {
-          inventory_item.value = response
+          inventory_item.value = response;
           is_loading.value = false;
         });
   });
@@ -24,9 +31,9 @@
       <div class="card">
         <div v-if="!is_loading" class="card-content">
           <p class="title">SKU: {{ inventory_item.sku }}</p>
-          <p class="subtitle">
+          <p v-if="product_name" class="subtitle">
             <router-link :to="{ name: 'products_view', params: { id: inventory_item.product.id }}">
-              Product: {{ inventory_item.product.id }} {{ inventory_item.product.product_name }}
+              Product: {{ inventory_item.product.id }} {{ product_name }}
             </router-link>
           </p>
           <div class="columns is-multiline">
@@ -39,9 +46,9 @@
               <b>Weight: </b>{{ inventory_item.weight }}<br>
             </div>
             <div class="column is-6-desktop">
-              <b>Price: </b>{{ inventory_item.price_cents }}<br>
-              <b>Sale Price: </b>{{ inventory_item.sale_price_cents }}<br>
-              <b>Cost: </b>{{ inventory_item.cost_cents }}<br>
+              <b>Price: </b>{{ $filters.centsToDollars(inventory_item.price_cents) }}<br>
+              <b>Sale Price: </b>{{ $filters.centsToDollars(inventory_item.sale_price_cents) }}<br>
+              <b>Cost: </b>{{ $filters.centsToDollars(inventory_item.cost_cents) }}<br>
             </div>
             <div class="column is-6-desktop">
               <b>Comment: </b>{{ inventory_item.comment }}

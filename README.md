@@ -42,7 +42,6 @@ https://github.com/ambielecki
 * Seeds are not DRY at all, would usually create a more general importer
 * Should setup SSL, CORS, etc
 * There is no caching, so every time you visit a page it reloads
-* Did not implement a currency formatter for the frontend, so everything is still cents
 
 ### Tour / Highlights
 

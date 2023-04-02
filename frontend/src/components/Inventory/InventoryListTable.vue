@@ -25,8 +25,8 @@
         <td>{{ item.sku }}</td>
         <td>{{ item.quantity }}</td>
         <td>{{ item.size }}</td>
-        <td>{{ item.price_cents }}</td>
-        <td>{{ item.cost_cents }}</td>
+        <td>{{ $filters.centsToDollars(item.price_cents) }}</td>
+        <td>{{ $filters.centsToDollars(item.cost_cents) }}</td>
       </tr>
       </tbody>
     </table>
