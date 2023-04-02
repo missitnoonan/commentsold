@@ -44,4 +44,20 @@ class InventoryRepository extends AbstractRepository implements InventoryReposit
             ->rightJoin('products', 'inventories.product_id', 'products.id')
             ->where('products.admin_id', auth()->user()->id);
     }
+
+    protected function specifySelectForList(Builder $query): Builder
+    {
+        return $query->select([
+            'inventories.id',
+            'products.product_name',
+            'inventories.sku',
+            'inventories.quantity',
+            'inventories.color',
+            'inventories.size',
+            'inventories.price_cents',
+            'inventories.cost_cents',
+            'products.admin_id',
+            'products.id as product_id',
+        ]);
+    }
 }

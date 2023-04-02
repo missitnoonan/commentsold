@@ -37,7 +37,6 @@
       emit('sortDirectionNavigate', value);
     }
   });
-
 </script>
 
 <template>

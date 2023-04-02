@@ -31,6 +31,16 @@ const router = createRouter({
       },
     },
     {
+      path: '/inventory',
+      name: 'inventory_list',
+      component: () => import('../views/pages/Inventory/InventoryList.vue'),
+      beforeEnter: (to, from) => {
+        if (!useUserStore().is_logged_in && !AuthProvider.checkCachedToken()) {
+          return false;
+        }
+      },
+    },
+    {
       path: '/inventory/:id',
       name: 'inventory_item_view',
       component: () => import('../views/pages/Inventory/InventoryItemView.vue'),

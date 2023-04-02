@@ -60,6 +60,7 @@
     <div id="divelog_navbar" class="navbar-menu">
       <div class="navbar-start">
         <router-link v-if="userStore.is_logged_in" :to="{ name: 'products_list' }" class="navbar-item">Products</router-link>
+        <router-link v-if="userStore.is_logged_in" :to="{ name: 'inventory_list' }" class="navbar-item">Inventory</router-link>
       </div>
 
       <div class="navbar-end">
