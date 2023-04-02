@@ -5,7 +5,6 @@ namespace App\Repositories;
 use App\Interfaces\ProductRepositoryInterface;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Builder;
-use mysql_xdevapi\Exception;
 
 class ProductRepository extends AbstractRepository implements ProductRepositoryInterface
 {
@@ -47,6 +46,7 @@ class ProductRepository extends AbstractRepository implements ProductRepositoryI
 
     protected function addAuthorization(Builder $query): Builder
     {
+        // this isn't ideal and comes from reusing old code, getting the user_id in this way makes testing harder
         $user_id = auth()->user()->id;
         return $query->where('admin_id', $user_id);
     }

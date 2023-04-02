@@ -1,6 +1,15 @@
 # Base Laravel + Vue
 
-## Basic Setup / Requirements
+## Description
+This is a monorepo for a basic docker development environment with a Laravel backed API
+in the directory backend and a Vue frontend in the directory frontend.
+
+I did not have time to get this up online, my current droplet is only running PHP 7.3, just getting an 8.2 up now
+
+This is in a fresh github repo as my main repo is connected to my current role, but that can be found at
+https://github.com/ambielecki
+
+### Basic Setup / Requirements
 
 * docker desktop with compose must be installed
 * edit hosts and add frontend.test and backend.test
@@ -21,7 +30,7 @@
     * leave and npm run dev from command line and access through local host indicated (assumes node is installed on the system)
 * App should be accessible at http://frontend.test
 
-## Description / Caveats
+### Description / Caveats
 
 * Definitely spent more than 4 hours, there's a lot here to get something that works right and looks decent
 * Quite a bit of the backend auth and frontend shell / auth is from other personal projects
@@ -33,9 +42,10 @@
 * Should setup SSL, CORS, etc
 * There is no caching, so every time you visit a page it reloads
 
-## Tour / Highlights
+### Tour / Highlights
 
 * Most routes are behind auth, so login with the first user in the csv
   * email: larhonda.hovis@foo.com pw: cghmpbKXXK
 * Implemented product list, product view, inventory list, inventory view
+* Implemented some minimal testing for the ProductRepository, hampered by some outside code I reused
 

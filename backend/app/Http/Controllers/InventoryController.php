@@ -53,6 +53,6 @@ class InventoryController extends Controller
             'Unauthorized',
             Message::MESSAGE_WARNING,
             [],
-        ));
+        ), 401);
     }
 }

@@ -53,6 +53,6 @@ class ProductController extends Controller
             'Unauthorized',
             Message::MESSAGE_WARNING,
             [],
-        ));
+        ), 401);
     }
 }
