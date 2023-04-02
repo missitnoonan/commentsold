@@ -39,5 +39,20 @@ class InventoryController extends Controller
     public function view(Request $request, $id): JsonResponse
     {
         $inventory_item = $this->inventory_repository->find($id);
+        if ($inventory_item['product']['admin_id'] === auth()->user()->id) {
+            return response()->json(JsonResponseData::formatData(
+                $request,
+                '',
+                Message::MESSAGE_OK,
+                $inventory_item,
+            ));
+        }
+
+        return response()->json(JsonResponseData::formatData(
+            $request,
+            'Unauthorized',
+            Message::MESSAGE_WARNING,
+            [],
+        ));
     }
 }
