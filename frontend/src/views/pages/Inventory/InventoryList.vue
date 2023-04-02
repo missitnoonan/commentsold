@@ -38,6 +38,7 @@
       sort_direction: sort_direction.value,
       page: page.value,
       limit: limit.value,
+      search: search.value,
     })
         .then((results) => {
           inventory.value = results.inventory_repositories;
@@ -78,6 +79,12 @@
     limit.value = new_limit;
     getList();
   }
+
+  function handleSearch(new_search) {
+    page.value = 1;
+    search.value = new_search;
+    getList();
+  }
 </script>
 
 <template>
@@ -100,7 +107,7 @@
               />
             </div>
             <div class="column is-12">
-              <SearchBar :search="search"/>
+              <SearchBar :search="search" @searchNavigate="handleSearch"/>
             </div>
             <div v-if="!is_loading" class="column is-12">
               <InventoryListTable :inventory_items="inventory" :display_product_name="true" />

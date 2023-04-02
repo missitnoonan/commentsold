@@ -24,8 +24,9 @@ class InventoryController extends Controller
         $limit = $request->input('limit') ?? 20;
         $sort = $request->input('sort');
         $sort_direction = $request->input('sort_direction') ?? 'desc';
+        $search = $request->input('search') ?? '';
 
-        $list = $this->inventory_repository->list($page, $limit, $sort, $sort_direction);
+        $list = $this->inventory_repository->list($page, $limit, $sort, $sort_direction, $search);
 
         return response()->json(JsonResponseData::formatData(
             $request,

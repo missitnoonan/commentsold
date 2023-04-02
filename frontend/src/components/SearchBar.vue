@@ -6,7 +6,7 @@ import { ref } from "vue";
   const search_model = ref('');
 
   function filter() {
-    console.log(search_model.value);
+    emit('searchNavigate', search_model.value)
   }
 </script>
 

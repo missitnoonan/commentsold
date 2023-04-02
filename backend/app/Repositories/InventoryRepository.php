@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Builder;
 
 class InventoryRepository extends AbstractRepository implements InventoryRepositoryInterface
 {
+    private string $search;
+
     public function load(array $inventory_data): bool {
         try {
             Inventory::insert($inventory_data);
@@ -24,9 +26,12 @@ class InventoryRepository extends AbstractRepository implements InventoryReposit
         $page = 1,
         $limit = 20,
         $sort = null,
-        $sort_direction = 'desc'
+        $sort_direction = 'desc',
+        $search = '',
     ): array
     {
+        // not ideal, but some of this implementation is copied from elsewhere
+        $this->search = $search;
         $inventory = new Inventory();
         $query = $inventory->newQuery();
 
@@ -59,5 +64,17 @@ class InventoryRepository extends AbstractRepository implements InventoryReposit
             'products.admin_id',
             'products.id as product_id',
         ]);
+    }
+
+    protected function addSearch(Builder $query): Builder {
+        // this is not efficient, but it works
+        if ($this->search) {
+            return $query->where(function ($query) {
+                $query->where('inventories.sku', 'LIKE', "%$this->search%")
+                    ->orWhere('products.product_name', 'LIKE', "%$this->search%");
+            });
+        }
+
+        return $query;
     }
 }
