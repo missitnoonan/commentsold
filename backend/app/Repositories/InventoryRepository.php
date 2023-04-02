@@ -36,7 +36,13 @@ class InventoryRepository extends AbstractRepository implements InventoryReposit
 
     public function find($inventory_id): array
     {
-        return [];
+        try {
+            $inventory_item = Inventory::with('product')->findOrFail($inventory_id);
+
+            return $inventory_item->toArray();
+        } catch (\Exception $exception) {
+            // TODO: Handle Exceptions
+        }
     }
 
     protected function addAuthorization(Builder $query): Builder

@@ -36,8 +36,8 @@ class InventoryController extends Controller
         ));
     }
 
-    public function view(Request $request): JsonResponse
+    public function view(Request $request, $id): JsonResponse
     {
-        return response()->json();
+        $inventory_item = $this->inventory_repository->find($id);
     }
 }
