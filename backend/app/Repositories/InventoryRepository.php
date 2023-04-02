@@ -62,6 +62,7 @@ class InventoryRepository extends AbstractRepository implements InventoryReposit
         ]);
     }
 
+    // this is inefficient, but works to show search
     protected function addSearch(Builder $query, $search): Builder {
         if ($search) {
             return $query->where(function ($query) use ($search) {
