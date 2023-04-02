@@ -103,7 +103,7 @@
       <div class="card">
         <div class="card-content">
           <p class="title">Inventory</p>
-          <p v-if="show_stats" class="subtitle">{{ stats.total_items }} Items In {{ stats.sku_count }} SKUs</p>
+          <p v-if="show_stats" class="subtitle">{{ stats.total_items }} Items Stocked In {{ stats.sku_count }} SKUs</p>
           <div v-if="show_pagination" class="columns is-multiline is-mobile">
             <div class="column is-12">
               <ListOptions

@@ -62,7 +62,7 @@ class InventoryRepository extends AbstractRepository implements InventoryReposit
     protected function addAuthorization(Builder $query): Builder
     {
         return $query
-            ->rightJoin('products', 'inventories.product_id', 'products.id')
+            ->join('products', 'inventories.product_id', 'products.id')
             ->where('products.admin_id', auth()->user()->id);
     }
 
