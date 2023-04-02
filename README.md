@@ -26,11 +26,12 @@
 * Definitely spent more than 4 hours, there's a lot here to get something that works right and looks decent
 * Quite a bit of the backend auth and frontend shell / auth is from other personal projects
 * The auth setup is very simple, just a JWT that is stored in pinia and localstorage, not prod ready
-* Very little testing, would write SO MANY MORE
+* Very little (no) testing, would write SO MANY MORE
 * Very little error handling, especially in the backend
 * The repository pattern is massive overkill
 * Seeds are not DRY at all, would usually create a more general importer
 * Should setup SSL, CORS, etc
+* There is no caching, so every time you visit a page it reloads
 
 ## Tour / Highlights
 
