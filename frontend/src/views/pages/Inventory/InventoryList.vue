@@ -107,7 +107,7 @@
               />
             </div>
             <div class="column is-12">
-              <SearchBar :search="search" @searchNavigate="handleSearch"/>
+              <SearchBar label="Search (SKU or Product Name)" placeholder="SKU or Product Name" @searchNavigate="handleSearch"/>
             </div>
             <div v-if="!is_loading" class="column is-12">
               <InventoryListTable :inventory_items="inventory" :display_product_name="true" />

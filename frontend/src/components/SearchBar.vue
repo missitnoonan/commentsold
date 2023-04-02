@@ -1,6 +1,7 @@
 <script setup>
 import { ref } from "vue";
 
+  const props = defineProps(['label', 'placeholder']);
   const emit = defineEmits(['searchNavigate']);
 
   const search_model = ref('');
@@ -14,9 +15,9 @@ import { ref } from "vue";
   <div class="columns is-mobile">
     <div class="column is-6">
       <div class="field">
-        <label class="label">Search (SKU or Product ID)</label>
+        <label class="label">{{ props.label }}</label>
         <div class="control">
-          <input class="input" type="text" placeholder="SKU or Product ID" v-model="search_model">
+          <input class="input" type="text" :placeholder="props.placeholder" v-model="search_model">
         </div>
       </div>
     </div>
