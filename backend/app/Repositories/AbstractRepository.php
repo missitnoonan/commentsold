@@ -2,15 +2,11 @@
 
 namespace App\Repositories;
 
-use App\Library\JsonResponseData;
-use App\Library\Message;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 abstract class AbstractRepository {
-    protected function addSearch(Builder $query): Builder
+    protected function addSearch(Builder $query, $search): Builder
     {
         return $query;
     }
@@ -25,13 +21,13 @@ abstract class AbstractRepository {
         return $query;
     }
 
-    public function getList(Builder $query, $page, $limit, $sort = null, $sort_direction = 'DESC'): array
+    public function getList(Builder $query, $page, $limit, $sort = null, $sort_direction = 'DESC', $search = ''): array
     {
         $skip = ($page - 1) * $limit;
 
         $query = $this->specifySelectForList($query);
         $query = $this->addAuthorization($query);
-        $query = $this->addSearch($query);
+        $query = $this->addSearch($query, $search);
 
         // TODO: Implement check of sortable fields
         if ($sort) {

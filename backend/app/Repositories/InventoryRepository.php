@@ -8,8 +8,6 @@ use Illuminate\Database\Eloquent\Builder;
 
 class InventoryRepository extends AbstractRepository implements InventoryRepositoryInterface
 {
-    private string $search;
-
     public function load(array $inventory_data): bool {
         try {
             Inventory::insert($inventory_data);
@@ -30,12 +28,10 @@ class InventoryRepository extends AbstractRepository implements InventoryReposit
         $search = '',
     ): array
     {
-        // not ideal, but some of this implementation is copied from elsewhere
-        $this->search = $search;
         $inventory = new Inventory();
         $query = $inventory->newQuery();
 
-        return $this->getList($query, $page, $limit, $sort, $sort_direction);
+        return $this->getList($query, $page, $limit, $sort, $sort_direction, $search);
     }
 
     public function find($inventory_id): array
@@ -66,12 +62,11 @@ class InventoryRepository extends AbstractRepository implements InventoryReposit
         ]);
     }
 
-    protected function addSearch(Builder $query): Builder {
-        // this is not efficient, but it works
-        if ($this->search) {
-            return $query->where(function ($query) {
-                $query->where('inventories.sku', 'LIKE', "%$this->search%")
-                    ->orWhere('products.product_name', 'LIKE', "%$this->search%");
+    protected function addSearch(Builder $query, $search): Builder {
+        if ($search) {
+            return $query->where(function ($query) use ($search) {
+                $query->where('inventories.sku', 'LIKE', "%$search%")
+                    ->orWhere('products.product_name', 'LIKE', "%$search%");
             });
         }
 
