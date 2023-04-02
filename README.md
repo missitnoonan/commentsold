@@ -11,6 +11,7 @@ https://github.com/ambielecki
 
 ### Basic Setup / Requirements
 
+* clone repository locally
 * docker desktop with compose must be installed
 * edit hosts and add frontend.test and backend.test
 * in backend copy .env.example to .env
