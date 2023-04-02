@@ -44,6 +44,7 @@
           </div>
           <div v-if="show_inventory" class="columns">
             <div class="column is-12">
+              <p class="subtitle">SKUs</p>
               <InventoryListTable :display_product_name="false" :inventory_items="product.inventories" />
             </div>
           </div>
