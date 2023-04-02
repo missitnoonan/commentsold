@@ -54,7 +54,9 @@ class ApiAuthController extends Controller
             ), 401);
         }
 
-        $user = User::where('email', $request->input('email'))->first();
+        $user = User::where('email', $request->input('email'))
+            ->select(['id', 'name', 'email', 'super_admin'])
+            ->first();
 
         return $this->respondWithToken($request, $token, 'Successfully Logged In', Message::MESSAGE_SUCCESS, $user);
     }

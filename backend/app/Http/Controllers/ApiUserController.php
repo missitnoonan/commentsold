@@ -14,11 +14,19 @@ use Illuminate\Support\Facades\Log;
 class ApiUserController extends Controller
 {
     public function getUser(Request $request): JsonResponse {
+        $user = $request->user()->toArray();
+        $filtered_data = [
+            'id' => $user['id'],
+            'name' => $user['name'],
+            'email' => $user['email'],
+            'super_admin' => $user['super_admin']
+        ];
+
         return response()->json(JsonResponseData::formatData(
             $request,
             '',
             Message::MESSAGE_OK,
-            $request->user()->toArray()
+            $filtered_data,
         ));
     }
 
