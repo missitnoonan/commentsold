@@ -90,9 +90,12 @@
     getList();
   }
 
-  function handleSearch(new_search) {
-    page.value = 1;
+  function updateSearch(new_search) {
     search.value = new_search;
+  }
+
+  function handleSearch() {
+    page.value = 1;
     getList();
   }
 </script>
@@ -118,7 +121,13 @@
               />
             </div>
             <div class="column is-12">
-              <SearchBar label="Search (SKU or Product Name)" placeholder="SKU or Product Name" @searchNavigate="handleSearch"/>
+              <SearchBar
+                  :search="search"
+                  label="Search (SKU or Product Name)"
+                  placeholder="SKU or Product Name"
+                  @searchNavigate="handleSearch"
+                  @updateSearch="updateSearch"
+              />
             </div>
             <div v-if="!is_loading" class="column is-12">
               <InventoryListTable :inventory_items="inventory" :display_product_name="true" />

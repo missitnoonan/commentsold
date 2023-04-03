@@ -1,10 +1,17 @@
 <script setup>
-import { ref } from "vue";
+import {computed, ref} from "vue";
 
-  const props = defineProps(['label', 'placeholder']);
+  const props = defineProps(['label', 'placeholder', 'search']);
   const emit = defineEmits(['searchNavigate']);
 
-  const search_model = ref('');
+  const search_model = computed({
+    get() {
+      return props.search;
+    },
+    set(value) {
+      emit('updateSearch', value);
+    }
+  });
 
   function filter() {
     emit('searchNavigate', search_model.value)
