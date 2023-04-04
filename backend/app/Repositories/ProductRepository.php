@@ -32,9 +32,7 @@ class ProductRepository extends AbstractRepository implements ProductRepositoryI
         $query = $product->newQuery()
         ->leftJoin('inventories', 'inventories.product_id', 'products.id');
 
-        $value = $this->getList($query, $page, $limit, 'products.id', $sort_direction);
-
-        return $value;
+        return $this->getList($query, $page, $limit, 'products.id', $sort_direction);
     }
 
     public function find($product_id): array

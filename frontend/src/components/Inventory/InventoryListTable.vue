@@ -28,7 +28,9 @@
         <td>{{ item.size }}</td>
         <td>{{ $filters.centsToDollars(item.price_cents) }}</td>
         <td>{{ $filters.centsToDollars(item.cost_cents) }}</td>
-        <td>{{ $filters.centsToDollars(item.potential_revenue) }}</td>
+        <td v-if="item.protential_revenue">{{ $filters.centsToDollars(item.potential_revenue) }}</td>
+        <td v-else-if="item.quantity">{{ $filters.centsToDollars(item.price_cents * item.quantity) }}</td>
+        <td v-else></td>
       </tr>
       </tbody>
     </table>
