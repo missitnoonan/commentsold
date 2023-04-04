@@ -21,6 +21,11 @@ abstract class AbstractRepository {
         return $query;
     }
 
+    protected function addGroupBy(Builder $query): Builder
+    {
+        return $query;
+    }
+
     public function getList(Builder $query, $page, $limit, $sort = null, $sort_direction = 'DESC', $search = ''): array
     {
         $skip = ($page - 1) * $limit;
@@ -28,6 +33,7 @@ abstract class AbstractRepository {
         $query = $this->specifySelectForList($query);
         $query = $this->addAuthorization($query);
         $query = $this->addSearch($query, $search);
+        $query = $this->addGroupBy($query);
 
         // TODO: Implement check of sortable fields
         if ($sort) {
