@@ -28,11 +28,14 @@ class ProductRepository extends AbstractRepository implements ProductRepositoryI
         $sort_direction = 'desc'
     ): array
     {
+        if ($sort) {
+            $sort = "products.$sort";
+        }
         $product = new Product();
         $query = $product->newQuery()
-        ->leftJoin('inventories', 'inventories.product_id', 'products.id');
+            ->leftJoin('inventories', 'inventories.product_id', 'products.id');
 
-        return $this->getList($query, $page, $limit, 'products.id', $sort_direction);
+        return $this->getList($query, $page, $limit, $sort , $sort_direction);
     }
 
     public function find($product_id): array
