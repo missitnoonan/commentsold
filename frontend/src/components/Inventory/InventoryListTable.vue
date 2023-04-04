@@ -14,6 +14,7 @@
         <th>Size</th>
         <th>Price</th>
         <th>Cost</th>
+        <th>Potential Revenue</th>
       </tr>
       </thead>
       <tbody>
@@ -27,6 +28,7 @@
         <td>{{ item.size }}</td>
         <td>{{ $filters.centsToDollars(item.price_cents) }}</td>
         <td>{{ $filters.centsToDollars(item.cost_cents) }}</td>
+        <td>{{ $filters.centsToDollars(item.potential_revenue) }}</td>
       </tr>
       </tbody>
     </table>

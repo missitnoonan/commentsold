@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Interfaces\InventoryRepositoryInterface;
 use App\Models\Inventory;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\DB;
 
 class InventoryRepository extends AbstractRepository implements InventoryRepositoryInterface
 {
@@ -77,6 +78,7 @@ class InventoryRepository extends AbstractRepository implements InventoryReposit
             'inventories.size',
             'inventories.price_cents',
             'inventories.cost_cents',
+            DB::raw('inventories.price_cents * inventories.quantity as potential_revenue'),
             'products.admin_id',
             'products.id as product_id',
         ]);
