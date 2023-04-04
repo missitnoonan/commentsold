@@ -11,6 +11,7 @@
         <th>Name</th>
         <th>Style</th>
         <th>Brand</th>
+        <th>Potential Revenue</th>
       </tr>
       </thead>
       <tbody>
@@ -19,6 +20,7 @@
         <td>{{ product.product_name }}</td>
         <td>{{ product.style }}</td>
         <td>{{ product.brand }}</td>
+        <td>{{ $filters.centsToDollars(product.potential_revenue) }}</td>
       </tr>
       </tbody>
     </table>

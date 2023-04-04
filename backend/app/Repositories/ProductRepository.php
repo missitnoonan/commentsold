@@ -62,7 +62,7 @@ class ProductRepository extends AbstractRepository implements ProductRepositoryI
             'products.product_name',
             'products.style',
             'products.brand',
-            DB::raw('sum(inventories.price_cents * inventories.quantity)'),
+            DB::raw('sum(inventories.price_cents * inventories.quantity) as potential_revenue'),
         ]);
     }
 
